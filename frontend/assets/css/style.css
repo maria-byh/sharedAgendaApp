@@ -1,0 +1,65 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-family: "segoe ui", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.msg {
+  color: #f60000;
+  font-size: 1.2rem;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.form form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.form form h2 {
+  color: #313131;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.form form input {
+  width: 80%;
+  padding: 0.5rem;
+  margin: 0.5rem 0;
+  border: none;
+  border-radius: 5px;
+}
+
+.form form button {
+  width: 80%;
+  padding: 0.5rem;
+  margin: 0.5rem 0;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: #ffffff;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.form form p {
+  color: #2b2b2b;
+  font-size: 1rem;
+  margin-top: 1rem;
+}
+
+
+
