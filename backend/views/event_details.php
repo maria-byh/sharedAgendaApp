@@ -44,29 +44,40 @@ $event = $result->fetch_assoc();
 <html lang="en">
 
 <head>
-    <link rel="stylesheet" href="../../frontend/assets/css/style.css">
+    <link rel="stylesheet" href="../../frontend/assets/css/event-details.css">
     <title>Event Details</title>
 </head>
 
 <body>
     <header>
-        <h1>Event Details</h1>
-        <nav>
-            <a href="dashboard.php">⬅️ Back to Dashboard</a>
-        </nav>
+        <div class="header-bar">
+            <div class="toolbar">
+                <a href="dashboard.php" class="btn-back">← Back to Calendar</a>
+            </div>
+            <div class="toolbar">
+                <a href="dashboard.php?view=table">📋 Table View</a>
+                <a href="logout.php">🚪 Logout</a>
+            </div>
+        </div>
     </header>
-
     <main>
         <h2><?= htmlspecialchars($event['title']) ?></h2>
-        <p><strong>Description:</strong> <?= nl2br(htmlspecialchars($event['description'])) ?></p>
-        <p><strong>When:</strong> <?= date('Y-m-d H:i', strtotime($event['start_time'])) ?>
-            to <?= date('Y-m-d H:i', strtotime($event['end_time'])) ?></p>
-        <p><strong>Location:</strong> <?= htmlspecialchars($event['location'] ?? 'N/A') ?></p>
-        <p><strong>Owner:</strong> <?= htmlspecialchars($event['owner_email']) ?></p>
+        <section class="agenda">
+            <div class="event">
+                <p><strong>Description:</strong> <?= nl2br(htmlspecialchars($event['description'])) ?></p>
+                <p><strong>When:</strong> <?= date('Y-m-d H:i', strtotime($event['start_time'])) ?>
+                    to <?= date('Y-m-d H:i', strtotime($event['end_time'])) ?></p>
+                <p><strong>Location:</strong> <?= htmlspecialchars($event['location'] ?? 'N/A') ?></p>
+                <p><strong>Owner:</strong> <?= htmlspecialchars($event['owner_email']) ?></p>
 
-        <?php if ($event['user_id'] === $userId): ?>
-            <a href="edit_event.php?event_id=<?= $event['id'] ?>">✏️ Edit Event</a>
-        <?php endif; ?>
+                <?php if ($event['user_id'] === $userId): ?>
+                    <a href="edit_event.php?event_id=<?= $event['id'] ?>">✏️ Edit</a>
+                <?php endif; ?>
+                <?php if ($event['user_id'] == $_SESSION['id']): ?>
+                    <a href="../controllers/delete_event.php?event_id=<?= $event['id'] ?>" onclick="return confirm('are you sure you want to delete the event?');">🗑️ Delete</a>
+                <?php endif; ?>
+            </div>
+        </section>
     </main>
 </body>
 

@@ -29,7 +29,7 @@ $view = $_GET['view'] ?? 'calendar'; // 'calendar' or 'table'
 <body>
     <header>
         <div class="header-bar">
-            <div class="user-name">👤 Welcome, <?= isset($_SESSION['username']) ? htmlspecialchars($_SESSION['username']) : 'User' ?>!</div>
+            <div class="user-name">👤  Welcome, <?= isset($_SESSION['username']) ? htmlspecialchars($_SESSION['username']) : 'User' ?>!</div>
             <div class="toolbar">
                 <a href="add_event.php">➕ Create Event</a>
                 <?php if ($view !== 'table'): ?>
