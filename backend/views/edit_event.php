@@ -103,52 +103,65 @@ if ($event_id === 0) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Event</title>
-    <link rel="stylesheet" href="../../frontend/assets/css/style.css">
+    <link rel="stylesheet" href="../../frontend/assets/css/event-form.css">
 </head>
 
 <body>
-    <div class="form">
-        <form action="" method="post">
+    <header>
+        <div class="header-bar">
+            <div class="toolbar">
+                <a href="dashboard.php" class="btn-back">← Back to Calendar</a>
+            </div>
+            <div class="toolbar">
+                <a href="dashboard.php?view=table">📋 Table View</a>
+                <a href="logout.php">🚪 Logout</a>
+            </div>
+        </div>
+    </header>
+    <main>
+        <div class="form-container">
+
             <h2>Edit Event</h2>
-            <p class="msg"><?= $msg ?></p>
+            <p class="msg"><?= htmlspecialchars($msg) ?></p>
+            <form action="" method="post">
+                <!-- Event Title -->
+                <div class="form-group">
+                    <input type="text" name="title" id="title" class="form-control" value="<?= htmlspecialchars($event['title'] ?? '') ?>" required>
+                </div>
 
-            <!-- Event Title -->
-            <div class="form-group">
-                <input type="text" name="title" id="title" class="form-control" value="<?= htmlspecialchars($event['title'] ?? '') ?>" required>
-            </div>
+                <!-- Event Description -->
+                <div class="form-group">
+                    <textarea name="description" id="description" class="form-control" required><?= htmlspecialchars($event['description'] ?? '') ?></textarea>
+                </div>
 
-            <!-- Event Description -->
-            <div class="form-group">
-                <textarea name="description" id="description" class="form-control" required><?= htmlspecialchars($event['description'] ?? '') ?></textarea>
-            </div>
+                <!-- Event Start Time -->
+                <div class="form-group">
+                    <input type="datetime-local" name="start_time" id="start_time" class="form-control"
+                        value="<?= isset($event['start_time']) ? date('Y-m-d\TH:i', strtotime($event['start_time'])) : '' ?>" required>
 
-            <!-- Event Start Time -->
-            <div class="form-group">
-                <input type="datetime-local" name="start_time" id="start_time" class="form-control"
-                    value="<?= isset($event['start_time']) ? date('Y-m-d\TH:i', strtotime($event['start_time'])) : '' ?>" required>
+                </div>
 
-            </div>
+                <!-- Event End Time -->
+                <div class="form-group">
+                    <input type="datetime-local" name="end_time" id="end_time" class="form-control"
+                        value="<?= isset($event['end_time']) ? date('Y-m-d\TH:i', strtotime($event['end_time'])) : '' ?>" required>
 
-            <!-- Event End Time -->
-            <div class="form-group">
-                <input type="datetime-local" name="end_time" id="end_time" class="form-control"
-                    value="<?= isset($event['end_time']) ? date('Y-m-d\TH:i', strtotime($event['end_time'])) : '' ?>" required>
+                </div>
 
-            </div>
+                <!-- Event Location -->
+                <div class="form-group">
+                    <input type="text" name="location" id="location" class="form-control" value="<?= htmlspecialchars($event['location'] ?? '') ?>" required>
+                </div>
 
-            <!-- Event Location -->
-            <div class="form-group">
-                <input type="text" name="location" id="location" class="form-control" value="<?= htmlspecialchars($event['location'] ?? '') ?>" required>
-            </div>
+                <!-- Shared With -->
+                <div class="form-group">
+                    <input type="email" name="shared_with" id="shared_with" class="form-control" placeholder="Share with (email)" value="<?= htmlspecialchars($sharedWithEmail) ?>">
+                </div>
 
-            <!-- Shared With -->
-            <div class="form-group">
-                <input type="email" name="shared_with" id="shared_with" class="form-control" placeholder="Share with (email)" value="<?= htmlspecialchars($sharedWithEmail) ?>">
-            </div>
-
-            <button type="submit" name="submit" class="btn">Update Event</button>
-        </form>
-    </div>
+                <button type="submit" name="submit" class="btn">Update Event</button>
+            </form>
+        </div>
+    </main>
 </body>
 
 </html>
