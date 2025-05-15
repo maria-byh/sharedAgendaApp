@@ -1,41 +1,35 @@
 <?php
-include("connection.php");
+session_set_cookie_params([
+    'lifetime' => 0,
+    'path' => '/',
+    'domain' => '',
+    'secure' => isset($_SERVER['HTTPS']),
+    'httponly' => true,
+    'samesite' => 'Strict',
+]);
+session_start();
 
+if (empty($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32)); // Generate a CSRF token
+}
+
+require_once __DIR__ . '/../controllers/AuthController.php';
 $msg = "";
-if (isset($_POST["submit"])) {
-    $name = $_POST["name"];
-    $email = $_POST["email"];
-    $password = $_POST["password"];
-    $cpassword = $_POST["cpassword"];
 
-    if ($password !== $cpassword) {
-        $msg = "Password and Confirm Password do not match.";
+// Check if the user is already logged in
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
+        $msg = "Invalid CSRF token.";
     } else {
-        $select = "SELECT * FROM users WHERE email = ?";
-        $stmt = $connect->prepare($select);
-        $stmt->bind_param("s", $email);
-        $stmt->execute();
-        $result = $stmt->get_result();
-
-        if ($result && $result->num_rows > 0) {
-            $msg = "User already exists.";
-        } else {
-            $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-            $insert = "INSERT INTO users (name, email, password) VALUES (?, ?, ?)";
-            $stmt = $connect->prepare($insert);
-            $stmt->bind_param("sss", $name, $email, $hashed_password);
-            $stmt->execute();
-            header("Location: login.php");
-        }
+        $msg = AuthController::register($_POST["name"], $_POST["email"], $_POST["password"], $_POST["cpassword"]);
     }
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../frontend/assets/css/style.css">
     <title>Document</title>
 </head>
@@ -45,11 +39,17 @@ if (isset($_POST["submit"])) {
         <form action="" method="post">
             <h2>Registration</h2>
             <p class="msg"><?= $msg ?></p>
+            <!-- CSRF token -->
+            <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
             <div class="form-group">
-                <input type="text" name="name" id="name" placeholder="enter your name" class="form-control" required>
+                <input type="text" name="name" id="name" placeholder="enter your name" class="form-control"
+                    value="<?= htmlspecialchars($_POST['name'] ?? '') ?>"
+                    required>
             </div>
             <div class="form-group">
-                <input type="email" name="email" id="email" placeholder="enter your email" class="form-control" required>
+                <input type="email" name="email" id="email" placeholder="enter your email" class="form-control"
+                    value="<?= htmlspecialchars($_POST['email'] ?? '') ?>"
+                    required>
             </div>
             <div class="form-group">
                 <input type="password" name="password" id="password" placeholder="enter your password" class="form-control" required>
