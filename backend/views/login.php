@@ -2,7 +2,7 @@
 session_set_cookie_params([
     'lifetime' => 0,
     'path' => '/',
-    'domain' => '', 
+    'domain' => '',
     'secure' => isset($_SERVER['HTTPS']), // only on HTTPS
     'httponly' => true,
     'samesite' => 'Strict',
@@ -35,28 +35,33 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 </head>
 
 <body>
-    <div class="form">
-        <form action="" method="post">
-            <h2>Login</h2>
-            <p><?= $msg ?></p>
-            <!-- CSRF token hidden field -->
-            <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>"> 
-            <div class="form-group">
-                <input
-                    type="email"
-                    name="email"
-                    id="email"
-                    placeholder="enter your email"
-                    class="form-control"
-                    value="<?= htmlspecialchars($_POST['email'] ?? '') ?>"
-                    required>
-            </div>
-            <div class="form-group">
-                <input type="password" name="password" id="password" placeholder="enter your password" class="form-control" required>
-            </div>
-            <button type="submit" name="submit" class="btn">Login</button>
-            <p>Don't have an account? <a href="register.php">Register now</a></p>
-        </form>
+    <div class="login-container">
+        <div class="form-side">
+            <form class="" action="" method="post">
+                <h2>Welcome Back!</h2>
+                <p class="msg"><?= $msg ?></p>
+                <!-- CSRF token hidden field -->
+                <input type="hidden" style="display: none" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
+                <div class="form-group">
+                    <input
+                        type="email"
+                        name="email"
+                        id="email"
+                        placeholder="enter your email"
+                        class="form-control"
+                        value="<?= htmlspecialchars($_POST['email'] ?? '') ?>"
+                        required>
+                </div>
+                <div class="form-group">
+                    <input type="password" name="password" id="password" placeholder="enter your password" class="form-control" required>
+                </div>
+                <button type="submit" name="submit" class="btn">Login</button>
+                <p>Don't have an account? <a href="register.php">Register now</a></p>
+            </form>
+        </div>
+        <div class="image-side">
+            <img src="../../frontend/assets/images/login-illustration.png" alt="Login Illustration">
+        </div>
     </div>
 </body>
 

@@ -1,0 +1,57 @@
+# Ignore system files
+.DS_Store
+Thumbs.db
+
+# Ignore IDE/editor configs
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Ignore OS generated files
+ehthumbs.db
+Icon?
+Desktop.ini
+
+# Node (if used for frontend assets)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-lock.yaml
+
+# PHP-specific
+vendor/
+composer.lock
+composer.phar
+
+# Environment / config
+.env
+.env.*.local
+config.php
+
+# Logs
+*.log
+logs/
+storage/logs/
+
+# Cache / temp
+*.cache
+*.tmp
+*.bak
+.cache/
+temp/
+tmp/
+
+# Build output (if used)
+dist/
+build/
+
+# Uploads / assets (optional, if not versioned)
+uploads/
+assets/images/*
+!assets/images/.keep  # Keep folder structure if needed
+
+# Ignore git-ignored backup or swap files
+*.swp
+*~

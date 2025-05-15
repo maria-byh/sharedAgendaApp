@@ -35,34 +35,37 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 </head>
 
 <body>
-    <div class="form">
-        <form action="" method="post">
-            <h2>Registration</h2>
-            <p class="msg"><?= $msg ?></p>
-            <!-- CSRF token -->
-            <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
-            <div class="form-group">
-                <input type="text" name="name" id="name" placeholder="enter your name" class="form-control"
-                    value="<?= htmlspecialchars($_POST['name'] ?? '') ?>"
-                    required>
-            </div>
-            <div class="form-group">
-                <input type="email" name="email" id="email" placeholder="enter your email" class="form-control"
-                    value="<?= htmlspecialchars($_POST['email'] ?? '') ?>"
-                    required>
-            </div>
-            <div class="form-group">
-                <input type="password" name="password" id="password" placeholder="enter your password" class="form-control" required>
-            </div>
-            <div class="form-group">
-                <input type="password" name="cpassword" id="cpassword" placeholder="confirm your password" class="form-control" required>
-            </div>
-            <button type="submit" name="submit" class="btn">Register</button>
+    <div class="login-container">
+        <div class="form-side">
+            <form action="" method="post">
+                <h2>Registration</h2>
+                <p class="msg"><?= $msg ?></p>
+                <!-- CSRF token -->
+                <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
+                <div class="form-group">
+                    <input type="text" name="name" id="name" placeholder="enter your name" class="form-control"
+                        value="<?= htmlspecialchars($_POST['name'] ?? '') ?>"
+                        required>
+                </div>
+                <div class="form-group">
+                    <input type="email" name="email" id="email" placeholder="enter your email" class="form-control"
+                        value="<?= htmlspecialchars($_POST['email'] ?? '') ?>"
+                        required>
+                </div>
+                <div class="form-group">
+                    <input type="password" name="password" id="password" placeholder="enter your password" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" name="cpassword" id="cpassword" placeholder="confirm your password" class="form-control" required>
+                </div>
+                <button type="submit" name="submit" class="btn">Register</button>
 
-            <p>Already have an account? <a href="login.php">Login now</a></p>
-
-
-        </form>
+                <p>Already have an account? <a href="login.php">Login now</a></p>
+            </form>
+        </div>
+        <div class="image-side">
+            <img src="../../frontend/assets/images/login-illustration.png" alt="Login Illustration">
+        </div>
     </div>
 </body>
 

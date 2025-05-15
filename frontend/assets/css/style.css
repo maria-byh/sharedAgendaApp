@@ -1,65 +1,138 @@
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  text-decoration: none;
-  font-family: "segoe ui", Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Container that holds both form and image */
+.login-container {
+    display: flex;
+    height: 100vh;
+    width: 100%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Right side with the form */
+.form-side {
+    flex: 1;
+    background-color: #154D95; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+/* Form wrapper */
+.form-side form {
+    background: white;
+    padding: 40px 30px;
+    border-radius: 24px;
+    max-width: 500px;
+    width: 100%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Form title */
+.form-side h2 {
+    font-size: 28px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Feedback message */
+.form-side p {
+    font-size: 14px;
 }
 
 .msg {
-  color: #f60000;
-  font-size: 1.2rem;
-  text-align: center;
-  margin-top: 1rem;
+    color: #d9534f;
+    height: 20px;
 }
 
-.form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
+/* Input group */
+.form-group {
+    
+}
+/* Form inputs */
+.form-control {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #ccc;
+    border-radius: 30px;
+    font-size: 14px;
+    outline: none;
+    transition: border 0.3s;
 }
 
-.form form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
+.form-control:focus {
+    border-color: #2c87ff;
 }
 
-.form form h2 {
-  color: #313131;
-  font-size: 2rem;
-  margin-bottom: 1rem;
+/* Submit button */
+.btn {
+    width: 100%;
+    padding: 14px;
+    background-color: #2c87ff;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
 
-.form form input {
-  width: 80%;
-  padding: 0.5rem;
-  margin: 0.5rem 0;
-  border: none;
-  border-radius: 5px;
+.btn:hover {
+    background-color: #0056b3;
 }
 
-.form form button {
-  width: 80%;
-  padding: 0.5rem;
-  margin: 0.5rem 0;
-  border: none;
-  border-radius: 5px;
-  background-color: #007bff;
-  color: #ffffff;
-  font-size: 1rem;
-  cursor: pointer;
+/* Register link */
+.form-side form a {
+    color: #007bff;
+    text-decoration: none;
+    font-size: 14px;
 }
 
-.form form p {
-  color: #2b2b2b;
-  font-size: 1rem;
-  margin-top: 1rem;
+.form-side form a:hover {
+    text-decoration: underline;
+}
+
+/* Left side image */
+.image-side {
+    flex: 1;
+    background-color: #FAFBFA;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+}
+
+.image-side img {
+    max-width: 100%;
+    height: auto;
 }
 
 
 
+
+@media (max-width: 768px) {
+    .login-container {
+        flex-direction: column-reverse;
+    }
+
+    .image-side {
+        display: none; /* Optional: hide image on mobile */
+    }
+
+    .form-side {
+        flex: none;
+        width: 100%;
+        background-color: white;
+    }
+
+    .form-side form {
+        box-shadow: none;
+    }
+}
