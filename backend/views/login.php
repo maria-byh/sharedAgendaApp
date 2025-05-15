@@ -60,7 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             </form>
         </div>
         <div class="image-side">
-            <img src="../../frontend/assets/images/login-illustration.png" alt="Login Illustration">
+            <img src="../../frontend/assets/images/login-illustration.svg" alt="Login Illustration">
         </div>
     </div>
 </body>

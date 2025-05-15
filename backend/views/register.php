@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <div class="login-container">
         <div class="form-side">
             <form action="" method="post">
-                <h2>Registration</h2>
+                <h2>Sign up to get started!</h2>
                 <p class="msg"><?= $msg ?></p>
                 <!-- CSRF token -->
                 <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
@@ -64,7 +64,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             </form>
         </div>
         <div class="image-side">
-            <img src="../../frontend/assets/images/login-illustration.png" alt="Login Illustration">
+            <img src="../../frontend/assets/images/signup-illustration.svg" alt="Login Illustration">
         </div>
     </div>
 </body>
