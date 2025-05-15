@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 if (!isset($_SESSION['id'])) {
     header("Location: login.php");
     exit();
@@ -20,66 +21,27 @@ $view = $_GET['view'] ?? 'calendar'; // 'calendar' or 'table'
 <head>
     <meta charset="UTF-8">
     <title>My Agenda</title>
-    <link rel="stylesheet" href="../../frontend/assets/css/style.css">
+    <link rel="stylesheet" href="../../frontend/assets/css/dashboard.css">
     <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css" rel="stylesheet" />
-    <style>
-        #calendar {
-            max-width: 900px;
-            margin: 20px auto;
-        }
 
-        .fc-event.created {
-            background-color: #3788d8 !important;
-            border-color: #2c6ebd !important;
-        }
-
-        .fc-event.shared {
-            background-color: #34a853 !important;
-            border-color: #2a8748 !important;
-        }
-
-        .toolbar {
-            text-align: center;
-            margin: 20px;
-        }
-
-        .toolbar a {
-            margin: 0 10px;
-            padding: 10px 20px;
-            background-color: #2c6ebd;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-        }
-
-        .event {
-            border: 1px solid #ccc;
-            padding: 10px;
-            margin: 10px 0;
-            border-radius: 6px;
-        }
-
-        main {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-    </style>
 </head>
 
 <body>
     <header>
-        <h1>Welcome, <?= htmlspecialchars($_SESSION['user']) ?></h1>
-        <div class="toolbar">
-            <a href="add_event.php">➕ Create Event</a>
-            <?php if ($view !== 'table'): ?>
-                <a href="dashboard.php?view=table">📋 Table View</a>
-            <?php endif; ?>
-
-            <?php if ($view !== 'calendar'): ?>
-                <a href="dashboard.php?view=calendar">🗓️ Calendar View</a>
-            <?php endif; ?>
-            <a href="logout.php">🚪 Logout</a>
+        <div class="header-bar">
+            <div class="user-name">👤 Welcome, <?= isset($_SESSION['username']) ? htmlspecialchars($_SESSION['username']) : 'User' ?>!</div>
+            <div class="toolbar">
+                <a href="add_event.php">➕ Create Event</a>
+                <?php if ($view !== 'table'): ?>
+                    <a href="dashboard.php?view=table">📋 Table View</a>
+                <?php endif; ?>
+                <?php if ($view !== 'calendar'): ?>
+                    <a href="dashboard.php?view=calendar">🗓️ Calendar View</a>
+                <?php endif; ?>
+                <a href="logout.php">🚪 Logout</a>
+            </div>
         </div>
+
     </header>
 
     <main>
@@ -103,11 +65,14 @@ $view = $_GET['view'] ?? 'calendar'; // 'calendar' or 'table'
 
                         <a href="event_details.php?event_id=<?= $event['id'] ?>">👁️ View</a>
                         <a href="edit_event.php?event_id=<?= $event['id'] ?>">✏️ Edit</a>
+                        <?php if ($event['user_id'] == $_SESSION['id']): ?>
+                            <a href="../controllers/delete_event.php?event_id=<?= $event['id'] ?>" onclick="return confirm('are you sure you want to delete the event?');">🗑️ Delete</a>
+                        <?php endif; ?>
                     </div>
                 <?php endforeach; ?>
             </section>
 
-            <h2>📤 Shared With Me</h2>
+            <h2>📤 Events Shared With Me</h2>
             <section class="shared-agenda">
                 <?php foreach ($sharedEvents as $event): ?>
                     <div class="event">

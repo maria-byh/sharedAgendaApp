@@ -23,6 +23,7 @@ class AuthController
                 session_start(); 
                 session_regenerate_id(true); // Regenerate session ID to prevent session fixation
                 $_SESSION['user'] = $user['email'];
+                $_SESSION['username'] = $user['name'];
                 $_SESSION['id'] = $user['id'];
                 header("Location: ../views/dashboard.php");
                 exit();
