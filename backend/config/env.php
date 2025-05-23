@@ -1,8 +1,8 @@
 <?php
 return [
-    'DB_HOST' => 'localhost',
-    'DB_USER' => 'root',
-    'DB_PASS' => '1234567890',
+    'DB_HOST' => '',
+    'DB_USER' => '',
+    'DB_PASS' => '',
     'DB_NAME' => 'shared_agenda',
     'APP_ENV' => 'development',
 ];
